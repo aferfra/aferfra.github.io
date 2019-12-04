@@ -1,0 +1,38 @@
+<html>
+<head>
+	<!-- Include the CJS SDK -->
+	<script src="https://sdk-cdn.mypurecloud.com/javascript/63.0.0/purecloud-platform-client-v2.min.js"></script>
+
+	<script type="text/javascript">
+	  // Obtain a reference to the platformClient object
+	  const platformClient = require('platformClient');
+
+	  const client = platformClient.ApiClient.instance;
+	  client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+
+	  var clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
+	  var redirectUri = "window.location.href"
+	  // Create API instance
+		const usersApi = new platformClient.UsersApi();
+
+		// Authenticate
+		client.loginImplicitGrant(clientId, redirectUri)
+		  .then(() => {
+		    // Make request to GET /api/v2/users/me?expand=presence
+		    return usersApi.getUsersMe({ 'expand': ["presence"] });
+		  })
+		  .then((userMe) => {
+		    // Handle successful result
+		    console.log(`Hello, ${userMe.name}!`);
+		  })
+		  .catch((err) => {
+		    // Handle failure response
+		    console.log(err);
+		  });
+	</script>
+</head>
+<body>
+
+
+</body>
+</html>

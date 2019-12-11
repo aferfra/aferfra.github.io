@@ -8,7 +8,10 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v1.5.7 ######### JSON PARSE !!!!");
+		console.log("################################);
+    console.log("#### Versionado v1.6.0 #########);
+		console.log("#### Realizamos clearStation ###);
+		console.log("################################);
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -49,14 +52,14 @@
         stationsApi.getStations(opts)
         .then((data) => {
           //console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
-	  var obj = JSON.parse(JSON.stringify(data, null, 2));
+	  			const obj = JSON.parse(JSON.stringify(data, null, 2));
 	  
-	  console.log("########## Vemos si recogemos obj ###");
-	  console.log(obj);
+					console.log("########## Vemos si recogemos obj ###");
+					console.log(obj);
           console.log("########## FIN obj ###");
 		
           document.getElementById("stationName").innerHTML = obj.body.entities[0].name;
-	  document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
+	  			document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
           
         })
         .catch((err) => {
@@ -75,6 +78,14 @@
       });
     
     
+	  
+	  
+ 		function clearStation(){
+			//CODE
+			console.log("#### Entramos en clearStation ##");
+			console.log(obj.body.entities[0].id);
+			console.log("### FIN ##");
+		}
     
   </script>
   
@@ -86,7 +97,7 @@
   <p id="stationId"></p>
 
   <form method="post">
-  <button id="clear" value="clear_station" name="name_clear_station">CLEAR</button>
+  <button id="clear" value="clear_station" name="name_clear_station" onclick="clearStation();">CLEAR</button>
   </form>
   
 </body>	

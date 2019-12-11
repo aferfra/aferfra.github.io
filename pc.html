@@ -7,8 +7,8 @@
     <script type="text/javascript">
     
 		console.log("################################");
-		console.log("#### Versionado v1.7.1 ##########");
-		console.log("#### Loop para encontrar ST ###");
+		console.log("#### Versionado v1.8 ##########");
+		console.log("#### Liberar extension ########");
 		console.log("################################");
     
     // Obtain a reference to the platformClient object
@@ -28,9 +28,9 @@
 
     
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
-    client.setReturnExtendedResponses(true);
+    //client.setReturnExtendedResponses(true);
     client.setPersistSettings(true);
-    client.setDebugLog(console.log, 50);
+    //client.setDebugLog(console.log, 50);
     
     // Authenticate
     client.loginImplicitGrant(clientId, redirectUri)    
@@ -114,10 +114,12 @@
 					stationsApi.deleteStationAssociateduser(stationId)
 						.then(() => {
 						console.log("#### CLEAR OK! ##");
+						document.getElementById("result").innerHTML = "Extension liberada";
 						console.log("#### FIN ##");
 					})
 					.catch((err) => {
 						console.log("#### ERROR: No se ha podido desasociar la extension ##");
+						document.getElementById("result").innerHTML = "Error, no se ha podido liberar la extension. Comprueba si ya está libre.";
 						console.error(err);
 					});
 				}
@@ -127,6 +129,7 @@
         console.log(err);
       });
 			
+			document.getElementById('station').value = "";
 			console.log("### FIN ##");
 		}
     
@@ -135,5 +138,6 @@
   <body>
 		<input type=text id="station"/>
     <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
+		<p id="result"></p>
   </body>
 </html>

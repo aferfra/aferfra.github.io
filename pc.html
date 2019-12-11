@@ -7,7 +7,7 @@
     <script type="text/javascript">
     
 		console.log("################################");
-		console.log("#### Versionado v1.7 ##########");
+		console.log("#### Versionado v1.7.1 ##########");
 		console.log("#### Loop para encontrar ST ###");
 		console.log("################################");
     
@@ -22,6 +22,7 @@
     const stationsApi = new platformClient.StationsApi();
 		
     //const test = {};
+		let obj = "";
     let stationId = "";
     let stationName = "";
 
@@ -54,7 +55,7 @@
         stationsApi.getStations(opts)
         .then((data) => {
           //console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
-          const obj = JSON.parse(JSON.stringify(data, null, 2));
+          obj = JSON.parse(JSON.stringify(data, null, 2));
 
           console.log("########## Vemos si recogemos obj ###");
           console.log(obj);
@@ -96,7 +97,7 @@
 			client.loginImplicitGrant(clientId, redirectUri)    
       .then((data) => {
         console.log("## Estamos dentro ##")
-				console.log("## Buscamos la station`" + station + " ##");
+				console.log("## Buscamos la extension --> " + station + " ##");
 				
 				while (obj.body.entities[count].name != "") {
 					if (obj.body.entities[count].name == station){

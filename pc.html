@@ -7,6 +7,9 @@
   <script src="https://sdk-cdn.mypurecloud.com/javascript/64.0.0/purecloud-platform-client-v2.min.js"></script>
 
   <script type="text/javascript">
+    
+    console.log("#### Versionado v1 ######### Empezando");
+    
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
     
@@ -19,11 +22,13 @@
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
     client.setReturnExtendedResponses(true);
     client.setPersistSettings(true);
+    client.setDebugLog(console.log, 50);
     
     // Authenticate
     client.loginImplicitGrant(clientId, redirectUri)
     
     .then((data) => {
+        console.log("## Estamos dentro ##")
         console.log(data);
         // Do authenticated things
           return usersApi.getUsersMe({ 'expand': ["presence"] });

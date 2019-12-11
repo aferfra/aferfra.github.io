@@ -9,7 +9,7 @@
   <script type="text/javascript">
     
 	console.log("################################");
-	console.log("#### Versionado v1.6.1 #########");
+	console.log("#### Versionado v1.6.2 #########");
 	console.log("#### Realizamos clearStation ###");
 	console.log("################################");
     
@@ -88,7 +88,7 @@
  		function clearStation(){
 			//CODE
 			console.log("#### Entramos en clearStation ##");
-			console.log(test);
+			console.log(test.prop1);
 			console.log("### FIN ##");
 		}
     
@@ -102,7 +102,7 @@
   <p id="stationId"></p>
 
   <form method="post">
-  <button id="clear" value="clear_station" name="name_clear_station" onclick="clearStation();">CLEAR</button>
+  <button id="clear" onclick="clearStation();">CLEAR</button>
   </form>
   
 </body>	

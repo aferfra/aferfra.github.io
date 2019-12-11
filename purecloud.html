@@ -16,7 +16,7 @@
 		console.log('Authorization -- bearer ' + token);
 
         $.ajax({
-            url: "https://api.mypurecloud.ie/api/v2/users/me",
+            url: "https://api.mypurecloud.ie/api/v2/stations",
             type: "GET",
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
             success: function(data) {

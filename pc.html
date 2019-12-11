@@ -1,17 +1,15 @@
 <html>
-<head>
-
-  <title>Another Clap</title>
-  <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
-  <!-- Include the CJS SDK -->
-  <script src="https://sdk-cdn.mypurecloud.com/javascript/64.0.0/purecloud-platform-client-v2.min.js"></script>
-
-  <script type="text/javascript">
+  <head>
+    <title>Another Clap</title>
+    <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <!-- Include the CJS SDK -->
+    <script src="https://sdk-cdn.mypurecloud.com/javascript/64.0.0/purecloud-platform-client-v2.min.js"></script>
+    <script type="text/javascript">
     
-	console.log("################################");
-	console.log("#### Versionado v1.6.7 #########");
-	console.log("#### Realizamos clearStation ###");
-	console.log("################################");
+		console.log("################################");
+		console.log("#### Versionado v1.7 ##########");
+		console.log("#### Loop para encontrar ST ###");
+		console.log("################################");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -115,15 +113,10 @@
 		}
     
   </script>
-  
-</head>
-
-<body>
-
-  <p id="stationName"></p>
-  <p id="stationId"></p>
-
-  <button id="clear" onclick="clearStation();">CLEAR</button>
-  
-</body>	
+  </head>
+  <body>
+    <p id="stationName"></p>
+    <p id="stationId"></p>
+    <button id="clear" onclick="clearStation();">CLEAR</button>
+  </body>
 </html>

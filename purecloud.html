@@ -14,7 +14,7 @@
         console.log(location.hash);
         var token = getParameterByName('access_token');
 	var obj = '';
-		console.log('## Cambio a Stations v5 ######## AJAX delete');
+		console.log('## Cambio a Stations v6 ######## AJAX delete');
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/stations",
@@ -43,11 +43,10 @@
 	    
 	    
     $("clear").click(function(e) {
-    e.preventDefault();
     $.ajax({
+        url: "https://api.mypurecloud.ie/api/v2/stations/"+stationId+"/associateduser",
         type: "DELETE",
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
-        url: "/api/v2/stations/"+stationId+"/associateduser",
         success: function(result) {
 	    console.log(stationId);
             alert('ok');

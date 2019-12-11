@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v4 ######### Stations !!!!");
+    console.log("#### Versionado v5 ######### Stations !!!!");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -19,18 +19,6 @@
     
     //const usersApi = new platformClient.UsersApi();
     const stationsApi = new platformClient.StationsApi();
-    
-    //Parametros de StationsApi
-    let opts = { 
-      'pageSize': 25, // Number | Page size
-      'pageNumber': 1, // Number | Page number
-      'sortBy': "name", // String | Sort by
-      'name': "", // String | Name
-      'userSelectable': "", // String | True for stations that the user can select otherwise false
-      'webRtcUserId': "", // String | Filter for the webRtc station of the webRtcUserId
-      'id': "", // String | Comma separated list of stationIds
-      'lineAppearanceId': "" // String | lineAppearanceId
-    };
 
     
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
@@ -46,7 +34,19 @@
         // Do authenticated things
         //return usersApi.getUsersMe({ 'expand': ["presence"] });
       
-        apiInstance.getStations(opts)
+      //Parametros de StationsApi
+      let opts = { 
+        'pageSize': 25, // Number | Page size
+        'pageNumber': 1, // Number | Page number
+        'sortBy': "name", // String | Sort by
+        'name': "", // String | Name
+        'userSelectable': "", // String | True for stations that the user can select otherwise false
+        'webRtcUserId': "", // String | Filter for the webRtc station of the webRtcUserId
+        'id': "", // String | Comma separated list of stationIds
+        'lineAppearanceId': "" // String | lineAppearanceId
+      };
+      
+        stationsApi.getStations(opts)
         .then((data) => {
           console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
         })

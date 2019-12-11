@@ -13,7 +13,7 @@
     if(window.location.hash) {
         console.log(location.hash);
         var token = getParameterByName('access_token');
-		console.log('Authorization -- bearer ' + token);
+		console.log('## Cambio a Stations');
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/stations",
@@ -34,7 +34,7 @@
         }
 
         window.location.replace("https://login.mypurecloud.ie/oauth/authorize?" + jQuery.param(queryStringData));
-		console.log(" EEEEEEEEEEEEEEEEE YA ESTA");
+		console.log("## OK");
     }
     </script>
 </head>

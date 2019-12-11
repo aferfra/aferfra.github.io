@@ -46,7 +46,7 @@
     e.preventDefault();
     $.ajax({
         type: "DELETE",
-        beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},'
+        beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
         url: "/api/v2/stations/"+stationId+"/associateduser",
         success: function(result) {
 	    console.log(stationId);

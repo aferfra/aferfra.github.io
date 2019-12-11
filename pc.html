@@ -42,9 +42,19 @@
     client.loginImplicitGrant(clientId, redirectUri)    
       .then((data) => {
         console.log("## Estamos dentro ##")
-        console.log(data);
+        //console.log(data);
         // Do authenticated things
         //return usersApi.getUsersMe({ 'expand': ["presence"] });
+      
+        apiInstance.getStations(opts)
+        .then((data) => {
+          console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
+        })
+        .catch((err) => {
+          console.log('There was a failure calling getStations');
+          console.error(err);
+        });
+      
       })    
       /*.then((userMe) => {
         // Handle successful result
@@ -55,14 +65,7 @@
         console.log(err);
       });
     
-    apiInstance.getStations(opts)
-      .then((data) => {
-        console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
-      })
-      .catch((err) => {
-        console.log('There was a failure calling getStations');
-        console.error(err);
-      });
+    
     
   </script>
   

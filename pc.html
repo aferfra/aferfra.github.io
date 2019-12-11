@@ -9,7 +9,7 @@
   <script type="text/javascript">
     
 	console.log("################################");
-	console.log("#### Versionado v1.6.0 #########");
+	console.log("#### Versionado v1.6.1 #########");
 	console.log("#### Realizamos clearStation ###");
 	console.log("################################");
     
@@ -22,6 +22,8 @@
     
     //const usersApi = new platformClient.UsersApi();
     const stationsApi = new platformClient.StationsApi();
+		
+		const test = {};
 
     
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
@@ -57,6 +59,9 @@
 					console.log("########## Vemos si recogemos obj ###");
 					console.log(obj);
           console.log("########## FIN obj ###");
+					
+					test.prop1 = obj.body.entities[0].name;
+					test.prop2 = obj.body.entities[0].id;
 		
           document.getElementById("stationName").innerHTML = obj.body.entities[0].name;
 	  			document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
@@ -83,7 +88,7 @@
  		function clearStation(){
 			//CODE
 			console.log("#### Entramos en clearStation ##");
-			console.log(obj.body.entities[0].id);
+			console.log(test);
 			console.log("### FIN ##");
 		}
     

@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Public Client Flow</title>
+    <script src='http://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <script>
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\#&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.hash);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    if(window.location.hash) {
+        console.log(location.hash);
+        var token = getParameterByName('access_token');
+
+        $.ajax({
+            url: "https://api.mypurecloud.com/api/v2/users/me",
+            type: "GET",
+            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
+        location.hash=''
+
+    } else {
+        var queryStringData = {
+            response_type : "token",
+            client_id : "111d49da-28b1-43f0-af26-c03f42e80463",
+            redirect_uri : "https://aferfra.github.io/INDEX.html"
+        }
+
+        window.location.replace("https://login.mypurecloud.ie/oauth/authorize?" + jQuery.param(queryStringData));
+		console.log(" EEEEEEEEEEEEEEEEE YA ESTA");
+    }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

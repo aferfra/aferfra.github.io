@@ -55,8 +55,8 @@
 	  console.log(obj);
           console.log("########## FIN obj ###");
 		
-          document.getElementById("stationName").innerHTML = obj.status;
-	  //document.getElementById("stationId").innerHTML = body.entities[0].id;
+          document.getElementById("stationName").innerHTML = obj.entities[0].name;
+	  document.getElementById("stationId").innerHTML = obj.entities[0].id;
           
         })
         .catch((err) => {

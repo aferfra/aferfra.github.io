@@ -24,6 +24,7 @@
     const stationsApi = new platformClient.StationsApi();
 		
 		const test = {};
+		const stationId, stationName;
 
     
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
@@ -62,6 +63,9 @@
 					
 					test.prop1 = obj.body.entities[0].name;
 					test.prop2 = obj.body.entities[0].id;
+					
+					stationName = obj.body.entities[0].name;
+					stationId = obj.body.entities[0].id;
 		
           document.getElementById("stationName").innerHTML = obj.body.entities[0].name;
 	  			document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
@@ -88,7 +92,9 @@
  		function clearStation(){
 			//CODE
 			console.log("#### Entramos en clearStation ##");
-			console.log(test.prop1);
+			//console.log(test.prop1);
+			console.log(stationId);
+			console.log(stationName);
 			console.log("### FIN ##");
 			console.log("### Vemos otros datos ##");
 			console.log(clientId);

@@ -92,8 +92,15 @@
  		function clearStation(){
 			//CODE
 			console.log("#### Entramos en clearStation ##");
-			.then((data) => {
+			
+			client.loginImplicitGrant(clientId, redirectUri)    
+      .then((data) => {
         console.log("## Estamos dentro ##")
+      .catch((err) => {
+        // Handle failure response
+        console.log(err);
+      });
+			
 			console.log("### FIN ##");
 		}
     

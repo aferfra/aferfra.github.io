@@ -14,7 +14,7 @@
         console.log(location.hash);
         var token = getParameterByName('access_token');
 	var obj = '';
-		console.log('## Cambio a Stations v4 ######## document.html data.entities[array].name & id');
+		console.log('## Cambio a Stations v4 ######## AJAX delete');
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/stations",
@@ -22,6 +22,7 @@
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
             success: function(data) {
                 console.log(data);
+		var stationId = data.entities[0].id;
 		document.getElementById("stationName").innerHTML = data.entities[0].name;
 		document.getElementById("stationId").innerHTML = data.entities[0].id;
             }
@@ -40,16 +41,32 @@
 		console.log("## OK");
     }
 	    
+	    
+    $("clear").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "DELETE",
+        url: "/api/v2/stations/"+stationId+"/associateduser",
+        success: function(result) {
+            alert('ok');
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+	    
     </script>
 </head>
+	
 <body>
+	
 <p id="stationName"></p>
-</br>
 <p id="stationId"></p>
-</body>
 	
-<script>
-	//document.getElementById("myData").innerHTML = obj.name + ", " + obj.age;
-</script>
+<form method="post">
+	<button id="clear" value="clear_station" name="name_clear_station">CLEAR</button>
+</form>
 	
+</body>	
 </html>

@@ -7,7 +7,7 @@
     <script type="text/javascript">
     
 		console.log("################################");
-		console.log("#### Versionado v1.8 ##########");
+		console.log("#### Versionado v1.8.1 ##########");
 		console.log("#### Liberar extension ########");
 		console.log("################################");
     
@@ -119,14 +119,17 @@
 					})
 					.catch((err) => {
 						console.log("#### ERROR: No se ha podido desasociar la extension ##");
-						document.getElementById("result").innerHTML = "Error, no se ha podido liberar la extension. Comprueba si ya está libre.";
+						document.getElementById("result").innerHTML = "Error. No se ha podido liberar la extension. Comprueba si ya está libre.";
 						console.error(err);
+						console.log("### FIN ##");
 					});
 				}
 			})
       .catch((err) => {
         // Handle failure response
         console.log(err);
+				document.getElementById("result").innerHTML = "Error. Revisa que la extensión es correcta y no tiene espacios.";
+				console.log("### FIN ##");
       });
 			
 			document.getElementById('station').value = "";

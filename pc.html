@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v1.5 ######### Realizamos JSON !!!!");
+    console.log("#### Versionado v1.5.1 ######### Realizamos JSON !!!!");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -50,8 +50,8 @@
         .then((data) => {
           console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
           
-          document.getElementById("stationName").innerHTML = Body.entities[0].name;
-		      document.getElementById("stationId").innerHTML = Body.entities[0].id;
+          document.getElementById("stationName").innerHTML = body.entities[0].name;
+		      document.getElementById("stationId").innerHTML = body.entities[0].id;
           
         })
         .catch((err) => {

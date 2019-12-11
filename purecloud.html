@@ -14,7 +14,7 @@
         console.log(location.hash);
         var token = getParameterByName('access_token');
 	var obj = '';
-		console.log('## Cambio a Stations v3 ######## document.html data entities');
+		console.log('## Cambio a Stations v4 ######## document.html data firstUri');
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/stations",
@@ -22,7 +22,7 @@
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
             success: function(data) {
                 console.log(data);
-		document.getElementById("demo").innerHTML = data.entities;
+		document.getElementById("demo").innerHTML = data.firstUri;
             }
         });
 

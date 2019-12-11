@@ -62,11 +62,11 @@
 					
           //test.prop1 = obj.body.entities[0].name;
           //test.prop2 = obj.body.entities[0].id;
-          stationName = obj.body.entities[0].name;
-          stationId = obj.body.entities[0].id;
+          //stationName = obj.body.entities[0].name;
+          //stationId = obj.body.entities[0].id;
 		
-          document.getElementById("stationName").innerHTML = obj.body.entities[0].name;
-	  			document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
+          //document.getElementById("stationName").innerHTML = obj.body.entities[0].name;
+	  			//document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
           
         })
         .catch((err) => {
@@ -91,19 +91,35 @@
 			//CODE
 			console.log("#### Entramos en clearStation ##");
 			
+			var count = 0;			
+			
 			client.loginImplicitGrant(clientId, redirectUri)    
       .then((data) => {
         console.log("## Estamos dentro ##")
-				console.log(station);
+				console.log("## Buscamos la station`" + station + " ##");
 				
-				stationsApi.deleteStationAssociateduser(stationId)
-					.then(() => {
-					console.log('deleteStationAssociateduser returned successfully.');
-				})
-				.catch((err) => {
-					console.log('There was a failure calling deleteStationAssociateduser');
-					console.error(err);
-				});
+				while (obj.body.entities[count].name != "") {
+					if (obj.body.entities[count].name == station){
+						stationId = obj.body.entities[count].id;
+						stationName = obj.body.entities[count].name;
+						console.log("#### Encontramos extension con id --> " + stationId + " ##");
+						break;
+					}
+					count++;
+				}
+				
+				if (stationId != ""){
+					console.log("#### Hacemos clear de la extension --> " + stationName + " ##");
+					stationsApi.deleteStationAssociateduser(stationId)
+						.then(() => {
+						console.log("#### CLEAR OK! ##");
+						console.log("#### FIN ##");
+					})
+					.catch((err) => {
+						console.log("#### ERROR: No se ha podido desasociar la extension ##");
+						console.error(err);
+					});
+				}
 			})
       .catch((err) => {
         // Handle failure response
@@ -116,8 +132,6 @@
   </script>
   </head>
   <body>
-    <p id="stationName"></p>
-    <p id="stationId"></p>
 		<input type=text id="station"/>
     <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
   </body>

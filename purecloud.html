@@ -14,7 +14,7 @@
         console.log(location.hash);
         var token = getParameterByName('access_token');
 	var obj = '';
-		console.log('## Cambio a Stations v2');
+		console.log('## Cambio a Stations v3 ######## document.html json');
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/stations",
@@ -22,7 +22,7 @@
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
             success: function(data) {
                 console.log(data);
-		myData = JSON.parse(data);
+		var myData = $.parseJSON(data);
             }
         });
 
@@ -38,9 +38,15 @@
         window.location.replace("https://login.mypurecloud.ie/oauth/authorize?" + jQuery.param(queryStringData));
 		console.log("## OK");
     }
+	    
     </script>
 </head>
 <body>
-
+<p id="demo"></p>
 </body>
+	
+<script>
+	//document.getElementById("myData").innerHTML = obj.name + ", " + obj.age;
+</script>
+	
 </html>

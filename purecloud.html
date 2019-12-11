@@ -13,11 +13,12 @@
     if(window.location.hash) {
         console.log(location.hash);
         var token = getParameterByName('access_token');
+		console.log('Authorization -- bearer ' + token);
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/users/me",
             type: "GET",
-			console.log('Authorization', 'bearer ' + token);
+			console.log('Authorization -- bearer ' + token);
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
             success: function(data) {
                 console.log(data);

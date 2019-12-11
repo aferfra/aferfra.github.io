@@ -87,7 +87,7 @@
     
 	  
 	  
- 		function clearStation(){
+ 		function clearStation(station){
 			//CODE
 			console.log("#### Entramos en clearStation ##");
 			
@@ -95,9 +95,10 @@
       .then((data) => {
         console.log("## Estamos dentro ##")
 				
-				stationsApi.deleteStationAssociateduser(stationId)
-					.then(() => {
-					console.log('deleteStationAssociateduser returned successfully.');
+				//stationsApi.deleteStationAssociateduser(stationId)
+				//	.then(() => {
+				//	console.log('deleteStationAssociateduser returned successfully.');
+				  console.log(station);
 				})
 				.catch((err) => {
 					console.log('There was a failure calling deleteStationAssociateduser');
@@ -117,6 +118,7 @@
   <body>
     <p id="stationName"></p>
     <p id="stationId"></p>
-    <button id="clear" onclick="clearStation();">CLEAR</button>
+		<input type=text id="station"/>
+    <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
   </body>
 </html>

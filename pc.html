@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v3 ######### Empezando");
+    console.log("#### Versionado v3 ######### Stations !!!!");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -17,7 +17,21 @@
     const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
     const redirectUri = "https://aferfra.github.io/pc.html";
     
-    const usersApi = new platformClient.UsersApi();
+    //const usersApi = new platformClient.UsersApi();
+    const stationsApi = new platformClient.StationsApi();
+    
+    //Parametros de StationsApi
+    let opts = { 
+      'pageSize': 25, // Number | Page size
+      'pageNumber': 1, // Number | Page number
+      'sortBy': "name", // String | Sort by
+      'name': "", // String | Name
+      'userSelectable': "", // String | True for stations that the user can select otherwise false
+      'webRtcUserId': "", // String | Filter for the webRtc station of the webRtcUserId
+      'id': "", // String | Comma separated list of stationIds
+      'lineAppearanceId': "" // String | lineAppearanceId
+    };
+
     
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
     client.setReturnExtendedResponses(true);
@@ -25,22 +39,31 @@
     client.setDebugLog(console.log, 50);
     
     // Authenticate
-    client.loginImplicitGrant(clientId, redirectUri)
-    
-    .then((data) => {
+    client.loginImplicitGrant(clientId, redirectUri)    
+      .then((data) => {
         console.log("## Estamos dentro ##")
         console.log(data);
         // Do authenticated things
         return usersApi.getUsersMe({ 'expand': ["presence"] });
-      })
-      .then((userMe) => {
+      })    
+      /*.then((userMe) => {
         // Handle successful result
         console.log(`Hello, ${userMe.name}!`);
-      })
+      })*/    
       .catch((err) => {
         // Handle failure response
         console.log(err);
       });
+    
+    apiInstance.getStations(opts)
+      .then((data) => {
+        console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
+      })
+      .catch((err) => {
+        console.log('There was a failure calling getStations');
+        console.error(err);
+      });
+    
   </script>
   
 </head>

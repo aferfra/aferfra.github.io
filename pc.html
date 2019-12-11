@@ -49,9 +49,12 @@
         stationsApi.getStations(opts)
         .then((data) => {
           console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
+	  let obj = JSON.stringify(data, null, 2);
+	  
+	  console.log(obj);
           
-          document.getElementById("stationName").innerHTML = body.entities[0].name;
-		      document.getElementById("stationId").innerHTML = body.entities[0].id;
+          //document.getElementById("stationName").innerHTML = body.entities[0].name;
+	  //document.getElementById("stationId").innerHTML = body.entities[0].id;
           
         })
         .catch((err) => {

@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v5 ######### Stations !!!!");
+    console.log("#### Versionado v1.5 ######### Realizamos JSON !!!!");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -49,6 +49,10 @@
         stationsApi.getStations(opts)
         .then((data) => {
           console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
+          
+          document.getElementById("stationName").innerHTML = Body.entities[0].name;
+		      document.getElementById("stationId").innerHTML = Body.entities[0].id;
+          
         })
         .catch((err) => {
           console.log('There was a failure calling getStations');

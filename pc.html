@@ -7,7 +7,7 @@
     <script type="text/javascript">
     
 		console.log("################################");
-		console.log("#### Versionado v1.8.1 ##########");
+		console.log("#### Versionado v1.8.2 ##########");
 		console.log("#### Liberar extension ########");
 		console.log("################################");
     
@@ -30,7 +30,7 @@
     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
     //client.setReturnExtendedResponses(true);
     client.setPersistSettings(true);
-    //client.setDebugLog(console.log, 50);
+    //client.setDebugLog(console.log, 50); //Si activamos debug, aplicar <body> en array de json: obj.body.entities[0].name
     
     // Authenticate
     client.loginImplicitGrant(clientId, redirectUri)    
@@ -99,10 +99,10 @@
         console.log("## Estamos dentro ##")
 				console.log("## Buscamos la extension --> " + station + " ##");
 				
-				while (obj.body.entities[count].name != "") {
-					if (obj.body.entities[count].name == station){
-						stationId = obj.body.entities[count].id;
-						stationName = obj.body.entities[count].name;
+				while (obj.entities[count].name != "") {
+					if (obj.entities[count].name == station){
+						stationId = obj.entities[count].id;
+						stationName = obj.entities[count].name;
 						console.log("#### Encontramos extension con id --> " + stationId + " ##");
 						break;
 					}

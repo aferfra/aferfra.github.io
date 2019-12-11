@@ -14,15 +14,15 @@
         console.log(location.hash);
         var token = getParameterByName('access_token');
 	var obj = '';
-		console.log('## Cambio a Stations v1');
+		console.log('## Cambio a Stations v2');
 
         $.ajax({
             url: "https://api.mypurecloud.ie/api/v2/stations",
             type: "GET",
-	    dataType: "json",
             beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'bearer ' + token);},
             success: function(data) {
                 console.log(data);
+		myData = JSON.parse(data);
             }
         });
 

@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v3 ######### Stations !!!!");
+    console.log("#### Versionado v4 ######### Stations !!!!");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -44,7 +44,7 @@
         console.log("## Estamos dentro ##")
         console.log(data);
         // Do authenticated things
-        return usersApi.getUsersMe({ 'expand': ["presence"] });
+        //return usersApi.getUsersMe({ 'expand': ["presence"] });
       })    
       /*.then((userMe) => {
         // Handle successful result

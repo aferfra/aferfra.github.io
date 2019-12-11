@@ -8,7 +8,7 @@
 
   <script type="text/javascript">
     
-    console.log("#### Versionado v1.5.2 ######### Realizamos JSON !!!!");
+    console.log("#### Versionado v1.5.3 ######### Realizamos JSON !!!!");
     
     // Obtain a reference to the platformClient object
     const platformClient = require('platformClient');
@@ -51,8 +51,10 @@
           //console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
 	  var obj = JSON.stringify(data, null, 2);
 	  
+
+	  console.log("########## Vemos si recogemos obj ###");
 	  console.log(obj);
-          
+          console.log("########## FIN obj ###");
           document.getElementById("stationName").innerHTML = data.entities[0].name;
 	  //document.getElementById("stationId").innerHTML = body.entities[0].id;
           

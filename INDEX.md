@@ -2,6 +2,6 @@
 <html>
 <body>
 <h1>Hello World</h1>
-<p>I'm hosted with GitHub Pagesss.</p>
+<p>I'm hosted with GitHub Pagessss.</p>
 </body>
 </html>

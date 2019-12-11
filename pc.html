@@ -96,6 +96,15 @@
 			client.loginImplicitGrant(clientId, redirectUri)    
       .then((data) => {
         console.log("## Estamos dentro ##")
+				
+				stationsApi.deleteStationAssociateduser(stationId)
+					.then(() => {
+					console.log('deleteStationAssociateduser returned successfully.');
+				})
+				.catch((err) => {
+					console.log('There was a failure calling deleteStationAssociateduser');
+					console.error(err);
+				});
 			})
       .catch((err) => {
         // Handle failure response

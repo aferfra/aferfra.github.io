@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <title>Another Clap</title>
+    <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <!-- Include the CJS SDK -->
+    <script src="https://sdk-cdn.mypurecloud.com/javascript/64.0.0/purecloud-platform-client-v2.min.js"></script>
+    <script type="text/javascript">
+    
+		console.log("################################");
+		console.log("#### Versionado v1.8.2 ##########");
+		console.log("#### Liberar extension ########");
+		console.log("################################");
+    
+    // Obtain a reference to the platformClient object
+    const platformClient = require('platformClient');
+    
+    const client = platformClient.ApiClient.instance;
+    const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
+    const redirectUri = "https://aferfra.github.io/pc.html";
+    
+    //const usersApi = new platformClient.UsersApi();
+    const stationsApi = new platformClient.StationsApi();
+		
+    //const test = {};
+		let obj = "";
+    let stationId = "";
+    let stationName = "";
+
+    
+    client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+    //client.setReturnExtendedResponses(true);
+    client.setPersistSettings(true);
+    //client.setDebugLog(console.log, 50); //Si activamos debug, aplicar <body> en array de json: obj.body.entities[0].name
+    
+    // Authenticate
+    client.loginImplicitGrant(clientId, redirectUri)    
+      .then((data) => {
+        console.log("## Estamos dentro ##")
+        //console.log(data);
+        // Do authenticated things
+        //return usersApi.getUsersMe({ 'expand': ["presence"] });
+      
+      //Parametros de StationsApi
+      let opts = { 
+        'pageSize': 25, // Number | Page size
+        'pageNumber': 1, // Number | Page number
+        'sortBy': "name", // String | Sort by
+        'name': "", // String | Name
+        'userSelectable': "", // String | True for stations that the user can select otherwise false
+        'webRtcUserId': "", // String | Filter for the webRtc station of the webRtcUserId
+        'id': "", // String | Comma separated list of stationIds
+        'lineAppearanceId': "" // String | lineAppearanceId
+      };
+      
+        stationsApi.getStations(opts)
+        .then((data) => {
+          //console.log(`getStations success! data: ${JSON.stringify(data, null, 2)}`);
+          obj = JSON.parse(JSON.stringify(data, null, 2));
+
+          console.log("########## Vemos si recogemos obj ###");
+          console.log(obj);
+          console.log("########## FIN obj ###");
+					
+          //test.prop1 = obj.body.entities[0].name;
+          //test.prop2 = obj.body.entities[0].id;
+          //stationName = obj.body.entities[0].name;
+          //stationId = obj.body.entities[0].id;
+		
+          //document.getElementById("stationName").innerHTML = obj.body.entities[0].name;
+	  			//document.getElementById("stationId").innerHTML = obj.body.entities[0].id;
+          
+        })
+        .catch((err) => {
+          console.log('There was a failure calling getStations');
+          console.error(err);
+        });
+      
+      })    
+      /*.then((userMe) => {
+        // Handle successful result
+        console.log(`Hello, ${userMe.name}!`);
+      })*/    
+      .catch((err) => {
+        // Handle failure response
+        console.log(err);
+      });
+    
+    
+	  
+	  
+ 		function clearStation(station){
+			//CODE
+			console.log("#### Entramos en clearStation ##");
+			
+			var count = 0;			
+			
+			client.loginImplicitGrant(clientId, redirectUri)    
+      .then((data) => {
+        console.log("## Estamos dentro ##")
+				console.log("## Buscamos la extension --> " + station + " ##");
+				
+				while (obj.entities[count].name != "") {
+					if (obj.entities[count].name == station){
+						stationId = obj.entities[count].id;
+						stationName = obj.entities[count].name;
+						console.log("#### Encontramos extension con id --> " + stationId + " ##");
+						break;
+					}
+					count++;
+				}
+				
+				if (stationId != ""){
+					console.log("#### Hacemos clear de la extension --> " + stationName + " ##");
+					stationsApi.deleteStationAssociateduser(stationId)
+						.then(() => {
+						console.log("#### CLEAR OK! ##");
+						document.getElementById("result").innerHTML = "Extension liberada";
+						console.log("#### FIN ##");
+					})
+					.catch((err) => {
+						console.log("#### ERROR: No se ha podido desasociar la extension ##");
+						document.getElementById("result").innerHTML = "Error. No se ha podido liberar la extension. Comprueba si ya está libre.";
+						console.error(err);
+						console.log("### FIN ##");
+					});
+				}
+			})
+      .catch((err) => {
+        // Handle failure response
+        console.log(err);
+				document.getElementById("result").innerHTML = "Error. Revisa que la extensión es correcta y no tiene espacios.";
+				console.log("### FIN ##");
+      });
+			
+			document.getElementById('station').value = "";
+			console.log("### FIN ##");
+		}
+    
+  </script>
+  </head>
+  <body>
+		<input type=text id="station"/>
+    <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
+		<p id="result"></p>
+  </body>
+</html>

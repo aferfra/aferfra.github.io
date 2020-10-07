@@ -35,7 +35,7 @@
     //    console.log(err);
     //  });
 	  
- 		function wrapupcode(wrapup_name){
+ 		function addWrapupCode(wrapup_name){
 			//CODE
 			console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
 			
@@ -84,6 +84,7 @@
     Region <input type=text id="region"/>
     Client ID <input type=text id="client_id"/>
     WrapUp Name <input type=text id="wrapup_name"/>
+    <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
 		<input type=text id="station"/>
     <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
 		<p id="result"></p>

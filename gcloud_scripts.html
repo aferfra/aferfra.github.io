@@ -1,0 +1,122 @@
+<html>
+<head>
+    <title>Another Clap</title>
+    <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <!-- Include the CJS SDK -->
+    <script src="https://sdk-cdn.mypurecloud.com/javascript/64.0.0/purecloud-platform-client-v2.min.js"></script>
+    <script type="text/javascript">
+
+        console.log("#################################");
+        console.log("#### Versionado v1.0.0 ##########");
+        console.log("#### Evolutio ############º######");
+        console.log("#### Genesys Cloud Scripts ######");
+        console.log("#################################");
+        
+        function login(region, client_id){
+            console.log(region);
+            console.log(client_id);
+        }
+        
+        // Obtain a reference to the platformClient object
+        const platformClient = require('platformClient');
+
+        // Plataforma Genesys Cloud
+        const client = platformClient.ApiClient.instance;
+        //const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
+        const redirectUri = "https://aferfra.github.io/wrapup_codes.html";
+        // API Routing
+        const wrapupcodesApi = new platformClient.RoutingApi();
+        // Genesys Cloud Dominio
+        client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+        client.setPersistSettings(true);
+        //client.setDebugLog(console.log, 50); //Si activamos debug, aplicar <body> en array de json: obj.body.entities[0].name
+
+        // Authenticate
+        //client.loginImplicitGrant(clientId, redirectUri)    
+        //  .then((data) => {
+        //    console.log("## Estamos dentro ##")
+        //  })
+        //  .catch((err) => {
+        // Handle failure response
+        //    console.log(err);
+        //  });
+
+        function addWrapupCode(wrapup_name){
+            //CODE
+            console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
+
+            var count = 0;			
+
+            client.loginImplicitGrant(clientId, redirectUri)    
+            .then((data) => {
+                console.log("## Estamos dentro ##")
+                console.log("## Añadimos el siguiente WrapUp --> " + wrapup_name + " ##");
+
+                let body = { 
+                    'name': "'" + wrapup_name + "'"
+                    //"dateCreated": "",     // Opcional
+                    //"dateModified": "",   // Opcional
+                    //"modifiedBy": "",     // Opcional
+                    //"createdBy": ""      // Opcional
+                };
+
+                if (wrapup_name != ""){
+                    wrapupcodesApi.postRoutingWrapupcodes(body)
+                    .then(() => {
+                        console.log("#### Se añade correctamente!!! ##");
+                        console.log("#### FIN ##");
+                        })
+                    .catch((err) => {
+                        console.log("#### ERROR: No se ha podido añadir el WrapUp Name ##");
+                        console.error(err);
+                        console.log("### FIN ##");
+                    });
+                }
+            })
+            .catch((err) => {
+                // Handle failure response
+                console.log(err);
+                document.getElementById("result").innerHTML = "Error General.";
+                console.log("### FIN ##");
+            });
+
+            document.getElementById('wrapup_name').value = "";
+            console.log("### FIN ##");
+            }
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                Region
+            </td>
+            <td>
+                <input type=text id="region"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Client ID
+            </td>
+            <td>
+                <input type=text id="client_id"/>
+            </td>
+            <td>
+            </td>
+                <button id="login" onclick="login(document.getElementById('region').value, document.getElementById('client_id').value);">Login</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    Region <input type=text id="region"/>
+    Client ID <input type=text id="client_id"/>
+    WrapUp Name <input type=text id="wrapup_name"/>
+    <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
+    <input type=text id="station"/>
+    <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
+    <p id="result"></p>
+</body>
+</html>

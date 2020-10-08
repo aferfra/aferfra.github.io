@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
         console.log("#################################");
-        console.log("#### Versionado v1.0.6         ##");
+        console.log("#### Versionado v1.0.7         ##");
         console.log("#### Evolutio                  ##");
         console.log("#### Genesys Cloud Scripts     ##");
         console.log("#################################");
@@ -33,8 +33,8 @@
         function login(){
             // Recogemos valor de Cliente
             form_cliente = document.getElementById('login_cliente');
-            cliente = form_cliente.options[cliente.selectedIndex].value;
-            cliente_text = form_cliente.options[cliente.selectedIndex].text;
+            cliente = form_cliente.options[form_cliente.selectedIndex].value;
+            cliente_text = form_cliente.options[form_cliente.selectedIndex].text;
             id_cliente = document.getElementById('login_otros_cliente').value;
 
             if (cliente == "login_cliente_otro" & id_cliente == "") {

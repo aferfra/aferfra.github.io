@@ -17,6 +17,7 @@
         let id_cliente;
         // Obtain a reference to the platformClient object
         let platformClient = require('platformClient');
+
         // Plataforma Genesys Cloud
         let client = platformClient.ApiClient.instance;        
         //const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
@@ -37,12 +38,12 @@
 
             if (cliente == "login_cliente_otro" & id_cliente == "") {
                 //document.getElementById('form_login').hidden = true
-                document.getElementById('form_login_submit').hidden = true
-                document.getElementById('form_login_otros').hidden = false
+                document.getElementById('form_login_submit').hidden = true;
+                document.getElementById('form_login_otros').hidden = false;
                 return
             } else {
-                document.getElementById('form_login_submit').hidden = false
-                document.getElementById('form_login_otros').hidden = true
+                document.getElementById('form_login_submit').hidden = false;
+                document.getElementById('form_login_otros').hidden = true;
             }
 
 
@@ -77,12 +78,13 @@
             client.loginImplicitGrant(id_cliente, redirectUri)    
             .then((data) => {
                 console.log("## Estamos dentro ##")
-                document.getElementById("form_login_result").innerHTML = data;
+                document.getElementById("form_login_result").innerHTML = "Login OK";
+                document.getElementById('container').hidden = false;
             })
             .catch((err) => {
                 // Handle failure response
                 console.log(err);
-                document.getElementById("form_login_result").innerHTML = err;
+                document.getElementById("form_login_result").innerHTML = "Login ERROR";
                 console.log("### FIN ##");
             });
         }
@@ -102,42 +104,32 @@
             console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
             var count = 0;			
 
-            client.loginImplicitGrant(id_cliente, redirectUri)    
-            .then((data) => {
-                console.log("## Estamos dentro ##")
-                console.log("## Añadimos el siguiente WrapUp --> " + wrapup_name + " ##");
+            console.log("## Estamos dentro ##")
+            console.log("## Añadimos el siguiente WrapUp --> " + wrapup_name + " ##");
 
-                let body = { 
-                    'name': "'" + wrapup_name + "'"
-                    //"dateCreated": "",     // Opcional
-                    //"dateModified": "",   // Opcional
-                    //"modifiedBy": "",     // Opcional
-                    //"createdBy": ""      // Opcional
-                };
+            let body = { 
+                'name': "'" + wrapup_name + "'"
+                //"dateCreated": "",     // Opcional
+                //"dateModified": "",   // Opcional
+                //"modifiedBy": "",     // Opcional
+                //"createdBy": ""      // Opcional
+            };
 
-                if (wrapup_name != ""){
-                    wrapupcodesApi.postRoutingWrapupcodes(body)
-                    .then(() => {
-                        console.log("#### Se añade correctamente!!! ##");
-                        console.log("#### FIN ##");
-                        })
-                    .catch((err) => {
-                        console.log("#### ERROR: No se ha podido añadir el WrapUp Name ##");
-                        console.error(err);
-                        console.log("### FIN ##");
-                    });
-                }
-            })
-            .catch((err) => {
-                // Handle failure response
-                console.log(err);
-                document.getElementById("result").innerHTML = "Error General.";
-                console.log("### FIN ##");
-            });
-
-            document.getElementById('wrapup_name').value = "";
-            console.log("### FIN ##");
+            if (wrapup_name != ""){
+                RoutingApi.postRoutingWrapupcodes(body)
+                .then(() => {
+                    console.log("#### Se añade correctamente!!! ##");
+                    console.log("#### FIN ##");
+                    })
+                .catch((err) => {
+                    console.log("#### ERROR: No se ha podido añadir el WrapUp Name ##");
+                    console.error(err);
+                    console.log("### FIN ##");
+                });
             }
+        document.getElementById('wrapup_name').value = "";
+        console.log("### FIN ##");
+        }
     </script>
 </head>
 

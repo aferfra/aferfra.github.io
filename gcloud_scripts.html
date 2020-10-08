@@ -11,28 +11,84 @@
         console.log("#### Evolutio ############º######");
         console.log("#### Genesys Cloud Scripts ######");
         console.log("#################################");
-        
-        function login(region, client_id){
-            console.log(region);
-            console.log(client_id);
-        }
-        
-        // Obtain a reference to the platformClient object
-        const platformClient = require('platformClient');
 
+        // Variables Generales
+        let cliente;
+        let id_cliente;
+        // Obtain a reference to the platformClient object
+        let platformClient = require('platformClient');
         // Plataforma Genesys Cloud
-        const client = platformClient.ApiClient.instance;
+        let client = platformClient.ApiClient.instance;        
         //const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
-        const redirectUri = "https://aferfra.github.io/wrapup_codes.html";
+        let redirectUri = "https://aferfra.github.io/gcloud_scripts.html";
         // API Routing
-        const wrapupcodesApi = new platformClient.RoutingApi();
+        let RoutingApi = new platformClient.RoutingApi();
         // Genesys Cloud Dominio
-        client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+        //client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
         client.setPersistSettings(true);
         //client.setDebugLog(console.log, 50); //Si activamos debug, aplicar <body> en array de json: obj.body.entities[0].name
+        
+        // LOGIN
+        function login(){
+            // Recogemos valor de Cliente
+            cliente = document.getElementById('login_cliente');
+            cliente = cliente.options[cliente.selectedIndex].value;
+            id_cliente = document.getElementById('login_otros_cliente').value;
+
+            if (cliente == "login_cliente_otro" & id_cliente == "") {
+                //document.getElementById('form_login').hidden = true
+                document.getElementById('form_login_submit').hidden = true
+                document.getElementById('form_login_otros').hidden = false
+                return
+            } else {
+                document.getElementById('form_login_submit').hidden = false
+                document.getElementById('form_login_otros').hidden = true
+            }
+
+
+            switch (cliente) {
+                case "login_cliente_btspain":
+                    console.log("btspain")
+                    client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+                    id_cliente = "111d49da-28b1-43f0-af26-c03f42e80463";
+                    break;
+                case "login_cliente_repsol":
+                    console.log("repsol")
+                    id_cliente = "TO-DO";
+                    break;
+                default:
+                    console.log("TO-DO Otro")
+                    var dominio = document.getElementById('login_otros_dominio');
+                    dominio = dominio.options[dominio.selectedIndex].value;
+                    switch (dominio) {
+                        case "login_otros_dominio_com":
+                            console.log("TO-DO dot com");
+                            break;
+                        case "login_otros_dominio_ie":
+                            client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+                            break;
+                        case "login_otros_dominio_de":
+                            console.log("TO-DO dot com");
+                            break;
+                    }
+            }
+
+
+            client.loginImplicitGrant(id_cliente, redirectUri)    
+            .then((data) => {
+                console.log("## Estamos dentro ##")
+                document.getElementById("form_login_result").innerHTML = data;
+            })
+            .catch((err) => {
+                // Handle failure response
+                console.log(err);
+                document.getElementById("form_login_result").innerHTML = err;
+                console.log("### FIN ##");
+            });
+        }
 
         // Authenticate
-        //client.loginImplicitGrant(clientId, redirectUri)    
+        //client.loginImplicitGrant(id_cliente, redirectUri)    
         //  .then((data) => {
         //    console.log("## Estamos dentro ##")
         //  })
@@ -44,10 +100,9 @@
         function addWrapupCode(wrapup_name){
             //CODE
             console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
-
             var count = 0;			
 
-            client.loginImplicitGrant(clientId, redirectUri)    
+            client.loginImplicitGrant(id_cliente, redirectUri)    
             .then((data) => {
                 console.log("## Estamos dentro ##")
                 console.log("## Añadimos el siguiente WrapUp --> " + wrapup_name + " ##");
@@ -87,37 +142,35 @@
 </head>
 
 <body>
-    <table>
-        <tr>
-            <td>
-                Region
-            </td>
-            <td>
-                <input type=text id="region"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Client ID
-            </td>
-            <td>
-                <input type=text id="client_id"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button id="login" onclick="login(document.getElementById('region').value, document.getElementById('client_id').value);">Login</button>
-            </td>
-        </tr>
-    </table>
+    <form id="form_login" onsubmit="return false">
+        <label for="login_cliente">Cliente:</label>
+        <select name="login_cliente" id="login_cliente">
+            <option value="login_cliente_btspain" selected>BT Spain</option>
+            <option value="login_cliente_repsol">Repsol</option>            
+            <option value="login_cliente_otro">Otro</option>
+        </select>
+        <input id="form_login_submit" type="submit" value="Submit" onclick="login();">
+    </form>
+    <form id="form_login_otros" onsubmit="return false" hidden>
+        <label for="login_otros_dominio">Dominio:</label>
+        <select name="login_otros_dominio" id="login_otros_dominio">
+            <option value="login_otros_dominio_com" selected>.com</option>
+            <option value="login_otros_dominio_ie">.ie</option>            
+            <option value="login_otros_dominio_de">.de</option>
+        </select>
+        <label for="login_otros_cliente">Cliente:</label>
+        <input type=text id="login_otros_cliente"/>
+        <input type="submit" value="Submit" onclick="login();">
+    </form>
     <br>
+    <h3 id="form_login_result">
+    </h3>
     <hr>
-    Region <input type=text id="region"/>
-    Client ID <input type=text id="client_id"/>
-    WrapUp Name <input type=text id="wrapup_name"/>
-    <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
-    <input type=text id="station"/>
-    <button id="clear" onclick="clearStation(document.getElementById('station').value);">CLEAR</button>
-    <p id="result"></p>
+    <br>
+    <div class="container" hidden>
+        WrapUp Name <input type=text id="wrapup_name"/>
+        <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
+        <p id="result"></p>
+    </div>
 </body>
 </html>

@@ -7,12 +7,14 @@
     <script type="text/javascript">
 
         console.log("#################################");
-        console.log("#### Versionado v1.0.9         ##");
+        console.log("#### Versionado v1.1.0         ##");
         console.log("#### Evolutio                  ##");
         console.log("#### Genesys Cloud Scripts     ##");
         console.log("#################################");
 
+        // ######################################################
         // Variables Generales
+        // ######################################################
         let cliente;
         let id_cliente;
         let redirectUri;
@@ -30,7 +32,9 @@
         client.setPersistSettings(true);
         //client.setDebugLog(console.log, 50); //Si activamos debug, aplicar <body> en array de json: obj.body.entities[0].name
         
-        // LOGIN
+        // ######################################################
+        // FUNCION LOGIN
+        // ######################################################
         function login(){
             // Recogemos valor de Cliente
             form_cliente = document.getElementById('login_cliente');
@@ -100,8 +104,10 @@
             });
         }
 
+        // ######################################################
+        // FUNCION AGREGAR WRAPUP NAME
+        // ######################################################
         function addWrapupCode(wrapup_name){
-            //CODE
             console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
             var body;
             input = document.getElementById('wrapup_name').value;
@@ -111,6 +117,7 @@
                 arr = (input.split(","));
             }
 
+            // Recorremos todos los valores
             arr.forEach( function( valor, indice, array) {
                 console.log("#### Agregamos wrapup code [" + valor + "] ##")
                 body = {
@@ -131,7 +138,6 @@
                     document.getElementById("wrapup_name_result").innerHTML = "KO";        
                 });
             })   
-            console.log("### FIN ##");
         }
     </script>
 </head>
@@ -164,10 +170,17 @@
     <br>
     <hr>
     <br>
-    <div id="container" class="container" hidden>
+
+    <section id="container" class="container" hidden>
         WrapUp Name <input type=text id="wrapup_name"/>
         <button id="btn_wrapup_name" onclick="addWrapupCode();">Añadir</button>
         <p id="wrapup_name_result"></p>
-    </div>
+    </section>
+    <br><hr><br>
+    <section id="container" class="container" hidden>
+        Skill <input type=text id="skill"/>
+        <button id="btn_skill" onclick="addSkill();">Añadir</button>
+        <p id="skill_result"></p>
+    </section>
 </body>
 </html>

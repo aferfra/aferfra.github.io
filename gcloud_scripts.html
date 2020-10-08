@@ -83,14 +83,15 @@
             client.loginImplicitGrant(id_cliente, redirectUri)    
             .then((data) => {
                 console.log("## Estamos dentro ##")
-                document.getElementById("form_login_result").innerHTML = "Login OK";
+                document.getElementById("login_result").innerHTML = cliente;
+                document.getElementById('login').hidden = true;
+                document.getElementById('logout').hidden = false;
                 document.getElementById('container').hidden = false;
                 return;
             })
             .catch((err) => {
                 // Handle failure response
                 console.log(err);
-                document.getElementById("form_login_result").innerHTML = "Login ERROR";
                 document.getElementById('container').hidden = true;
                 console.log("### FIN ##");
                 return;
@@ -142,29 +143,31 @@
 </head>
 
 <body>
-    <form id="form_login" onsubmit="return false">
-        <label for="login_cliente">Cliente:</label>
-        <select name="login_cliente" id="login_cliente">
-            <option value="login_cliente_btspain" selected>BT Spain</option>
-            <option value="login_cliente_repsol">Repsol</option>            
-            <option value="login_cliente_otro">Otro</option>
-        </select>
-        <input id="form_login_submit" type="submit" value="Submit" onclick="login();">
-    </form>
-    <form id="form_login_otros" onsubmit="return false" hidden>
-        <label for="login_otros_dominio">Dominio:</label>
-        <select name="login_otros_dominio" id="login_otros_dominio">
-            <option value="login_otros_dominio_com" selected>.com</option>
-            <option value="login_otros_dominio_ie">.ie</option>            
-            <option value="login_otros_dominio_de">.de</option>
-        </select>
-        <label for="login_otros_cliente">Cliente:</label>
-        <input type=text id="login_otros_cliente"/>
-        <input type="submit" value="Submit" onclick="login();">
-    </form>
+    <div id="login">
+        <form id="form_login" onsubmit="return false">
+            <label for="login_cliente">Cliente:</label>
+            <select name="login_cliente" id="login_cliente">
+                <option value="login_cliente_btspain" selected>BT Spain</option>
+                <option value="login_cliente_repsol">Repsol</option>            
+                <option value="login_cliente_otro">Otro</option>
+            </select>
+            <input id="form_login_submit" type="submit" value="Submit" onclick="login();">
+        </form>
+        <form id="form_login_otros" onsubmit="return false" hidden>
+            <label for="login_otros_dominio">Dominio:</label>
+            <select name="login_otros_dominio" id="login_otros_dominio">
+                <option value="login_otros_dominio_com" selected>.com</option>
+                <option value="login_otros_dominio_ie">.ie</option>            
+                <option value="login_otros_dominio_de">.de</option>
+            </select>
+            <label for="login_otros_cliente">Cliente:</label>
+            <input type=text id="login_otros_cliente"/>
+            <input type="submit" value="Submit" onclick="login();">
+        </form>
+    </div>
+    <h4 id="login_result"></h4>
+    <input id="logout" type="submit" value="Logout" onclick="location.reload();" hidden>
     <br>
-    <h3 id="form_login_result">
-    </h3>
     <hr>
     <br>
     <div id="container" class="container" hidden>

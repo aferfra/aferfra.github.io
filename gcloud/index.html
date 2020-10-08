@@ -20,8 +20,8 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item nav-pills">
+                    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -36,9 +36,6 @@
                     <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
         </div>
@@ -58,7 +55,7 @@
             <label for="login_otros_dominio">Dominio:</label>
             <select name="login_otros_dominio" id="login_otros_dominio">
                 <option value="login_otros_dominio_com" selected>.com</option>
-                <option value="login_otros_dominio_ie">.ie</option>            
+                <option value="login_otros_dominio_ie">.ie</option>
                 <option value="login_otros_dominio_de">.de</option>
             </select>
             <label for="login_otros_cliente">Cliente:</label>
@@ -69,7 +66,7 @@
     <h4 id="login_result"></h4>
     <input id="logout" type="submit" value="Logout" onclick="location.reload();" hidden>
 
-    <div class="container-fluid gscript" hidden>
+    <div class="container-fluid gcscript" hidden>
         <section>
             WrapUp Name <input type=text id="wrapup_name"/>
             <button id="btn_wrapup_name" onclick="addWrapupCode();">Añadir</button>

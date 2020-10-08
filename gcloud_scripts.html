@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
         console.log("#################################");
-        console.log("#### Versionado v1.0.1         ##");
+        console.log("#### Versionado v1.0.2         ##");
         console.log("#### Evolutio                  ##");
         console.log("#### Genesys Cloud Scripts     ##");
         console.log("#################################");
@@ -79,13 +79,14 @@
             .then((data) => {
                 console.log("## Estamos dentro ##")
                 document.getElementById("form_login_result").innerHTML = "Login OK";
-                document.getElementsByClassName('container').hidden = false;
+                document.getElementById('container').hidden = false;
                 return;
             })
             .catch((err) => {
                 // Handle failure response
                 console.log(err);
                 document.getElementById("form_login_result").innerHTML = "Login ERROR";
+                document.getElementById('container').hidden = true;
                 console.log("### FIN ##");
                 return;
             });
@@ -161,7 +162,7 @@
     </h3>
     <hr>
     <br>
-    <div class="container" hidden>
+    <div id="container" class="container" hidden>
         WrapUp Name <input type=text id="wrapup_name"/>
         <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
         <p id="result"></p>

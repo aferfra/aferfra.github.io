@@ -81,16 +81,29 @@ function login(){
     client.loginImplicitGrant(id_cliente, redirectUri)    
     .then((data) => {
         console.log("## Estamos dentro ##")
+        gcscript = document.getElementsByClassName("gcscript");
+
         document.getElementById("login_result").innerHTML = cliente_text;
         document.getElementById('login').hidden = true;
         document.getElementById('logout').hidden = false;
-        document.getElementById('container').hidden = false;
+
+        for (i=0; i < es.length; i++){
+            // Ocultamos idioma español
+            gcscript[i].hidden = false;
+        }
+
         return;
     })
     .catch((err) => {
         // Handle failure response
         console.log(err);
-        document.getElementById('container').hidden = true;
+        gcscript = document.getElementsByClassName("gcscript");
+
+        for (i=0; i < es.length; i++){
+            // Ocultamos idioma español
+            gcscript[i].hidden = false;
+        }
+
         console.log("### FIN ##");
         return;
     });

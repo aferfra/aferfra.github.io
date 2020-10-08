@@ -7,9 +7,9 @@
     <script type="text/javascript">
 
         console.log("#################################");
-        console.log("#### Versionado v1.0.1 ##########");
-        console.log("#### Evolutio ############º######");
-        console.log("#### Genesys Cloud Scripts ######");
+        console.log("#### Versionado v1.0.1         ##");
+        console.log("#### Evolutio                  ##");
+        console.log("#### Genesys Cloud Scripts     ##");
         console.log("#################################");
 
         // Variables Generales
@@ -79,13 +79,15 @@
             .then((data) => {
                 console.log("## Estamos dentro ##")
                 document.getElementById("form_login_result").innerHTML = "Login OK";
-                document.getElementById('container').hidden = false;
+                document.getElementsByClassName('container').hidden = false;
+                return;
             })
             .catch((err) => {
                 // Handle failure response
                 console.log(err);
                 document.getElementById("form_login_result").innerHTML = "Login ERROR";
                 console.log("### FIN ##");
+                return;
             });
         }
 

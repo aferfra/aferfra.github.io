@@ -50,7 +50,7 @@ function login(){
             console.log("btspain")
             client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
             id_cliente = "111d49da-28b1-43f0-af26-c03f42e80463";
-            redirectUri = "https://aferfra.github.io/gcloud_scripts.html";
+            redirectUri = "https://aferfra.github.io/gcloud/index.html";
             break;
         case "login_cliente_repsol":
             console.log("repsol")

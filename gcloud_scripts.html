@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
         console.log("#################################");
-        console.log("#### Versionado v1.0.4         ##");
+        console.log("#### Versionado v1.0.6         ##");
         console.log("#### Evolutio                  ##");
         console.log("#### Genesys Cloud Scripts     ##");
         console.log("#################################");
@@ -32,8 +32,9 @@
         // LOGIN
         function login(){
             // Recogemos valor de Cliente
-            cliente = document.getElementById('login_cliente');
-            cliente = cliente.options[cliente.selectedIndex].value;
+            form_cliente = document.getElementById('login_cliente');
+            cliente = form_cliente.options[cliente.selectedIndex].value;
+            cliente_text = form_cliente.options[cliente.selectedIndex].text;
             id_cliente = document.getElementById('login_otros_cliente').value;
 
             if (cliente == "login_cliente_otro" & id_cliente == "") {
@@ -83,7 +84,7 @@
             client.loginImplicitGrant(id_cliente, redirectUri)    
             .then((data) => {
                 console.log("## Estamos dentro ##")
-                document.getElementById("login_result").innerHTML = cliente;
+                document.getElementById("login_result").innerHTML = cliente_text;
                 document.getElementById('login').hidden = true;
                 document.getElementById('logout').hidden = false;
                 document.getElementById('container').hidden = false;
@@ -97,16 +98,6 @@
                 return;
             });
         }
-
-        // Authenticate
-        //client.loginImplicitGrant(id_cliente, redirectUri)    
-        //  .then((data) => {
-        //    console.log("## Estamos dentro ##")
-        //  })
-        //  .catch((err) => {
-        // Handle failure response
-        //    console.log(err);
-        //  });
 
         function addWrapupCode(wrapup_name){
             //CODE
@@ -134,9 +125,12 @@
                     console.log("#### ERROR: No se ha podido añadir el WrapUp Name ##");
                     console.error(err);
                     console.log("### FIN ##");
+                    document.getElementById('wrapup_name').value = "";
+                    document.getElementById("wrapup_name_result").innerHTML = "KO";        
                 });
             }
         document.getElementById('wrapup_name').value = "";
+        document.getElementById("wrapup_name_result").innerHTML = "OK";        
         console.log("### FIN ##");
         }
     </script>
@@ -173,7 +167,7 @@
     <div id="container" class="container" hidden>
         WrapUp Name <input type=text id="wrapup_name"/>
         <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
-        <p id="result"></p>
+        <p id="wrapup_name_result"></p>
     </div>
 </body>
 </html>

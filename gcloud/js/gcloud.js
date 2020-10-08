@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.1         ##");
+console.log("#### Versionado v1.1.2         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -87,7 +87,7 @@ function login(){
         document.getElementById('login').hidden = true;
         document.getElementById('logout').hidden = false;
 
-        for (i=0; i < es.length; i++){
+        for (i=0; i < gcscript.length; i++){
             // Ocultamos idioma español
             gcscript[i].hidden = false;
         }
@@ -99,7 +99,7 @@ function login(){
         console.log(err);
         gcscript = document.getElementsByClassName("gcscript");
 
-        for (i=0; i < es.length; i++){
+        for (i=0; i < gcscript.length; i++){
             // Ocultamos idioma español
             gcscript[i].hidden = false;
         }

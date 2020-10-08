@@ -15,13 +15,14 @@
         // Variables Generales
         let cliente;
         let id_cliente;
+        let redirectUri;
+        let wrapup_name_array = [];
+
         // Obtain a reference to the platformClient object
         let platformClient = require('platformClient');
-
         // Plataforma Genesys Cloud
         let client = platformClient.ApiClient.instance;        
-        //const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
-        let redirectUri;
+        //const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";        
         // API Routing
         let RoutingApi = new platformClient.RoutingApi();
         // Genesys Cloud Dominio
@@ -102,36 +103,35 @@
         function addWrapupCode(wrapup_name){
             //CODE
             console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
-            var count = 0;			
+            var body;
+            input = document.getElementById('wrapup_name').value;
+            arr = (input.split(", "));
 
-            console.log("## Estamos dentro ##")
-            console.log("## Añadimos el siguiente WrapUp --> " + wrapup_name + " ##");
+            if (arr[0].includes(",")) {
+                arr = (input.split(","));
+            }
 
-            let body = { 
-                'name': wrapup_name
-                //"dateCreated": "",     // Opcional
-                //"dateModified": "",   // Opcional
-                //"modifiedBy": "",     // Opcional
-                //"createdBy": ""      // Opcional
-            };
-
-            if (wrapup_name != ""){
+            arr.forEach( function( valor, indice, array) {
+                console.log("#### Agregamos wrapup code [" + valor + "] ##")
+                body = {
+                    'name': valor
+                };
+                // Llamamos a la API
                 RoutingApi.postRoutingWrapupcodes(body)
                 .then(() => {
-                    console.log("#### Se añade correctamente!!! ##");
-                    console.log("#### FIN ##");
+                    console.log("#### Se añade correctamente [" + valor + "] ##");
+                    document.getElementById('wrapup_name').value = "";
+                    document.getElementById("wrapup_name_result").innerHTML = "OK";   
                     })
                 .catch((err) => {
-                    console.log("#### ERROR: No se ha podido añadir el WrapUp Name ##");
+                    console.log("#### ERROR: No se ha podido añadir el WrapUp Name [" + valor + "] ##");
                     console.error(err);
                     console.log("### FIN ##");
                     document.getElementById('wrapup_name').value = "";
                     document.getElementById("wrapup_name_result").innerHTML = "KO";        
                 });
-            }
-        document.getElementById('wrapup_name').value = "";
-        document.getElementById("wrapup_name_result").innerHTML = "OK";        
-        console.log("### FIN ##");
+            })   
+            console.log("### FIN ##");
         }
     </script>
 </head>
@@ -166,7 +166,7 @@
     <br>
     <div id="container" class="container" hidden>
         WrapUp Name <input type=text id="wrapup_name"/>
-        <button id="btn_wrapup_name" onclick="addWrapupCode(document.getElementById('wrapup_name').value);">Añadir</button>
+        <button id="btn_wrapup_name" onclick="addWrapupCode();">Añadir</button>
         <p id="wrapup_name_result"></p>
     </div>
 </body>

@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Evolutio - GCloud Scripts</title>
+    <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <!-- Include the CJS SDK -->
+    <script src="https://sdk-cdn.mypurecloud.com/javascript/64.0.0/purecloud-platform-client-v2.min.js"></script>
+    <script src="js/gcloud.js"></script>
+</head>
+
+<body>
+    <div id="login">
+        <form id="form_login" onsubmit="return false">
+            <label for="login_cliente">Cliente:</label>
+            <select name="login_cliente" id="login_cliente">
+                <option value="login_cliente_btspain" selected>BT Spain</option>
+                <option value="login_cliente_repsol">Repsol</option>            
+                <option value="login_cliente_otro">Otro</option>
+            </select>
+            <input id="form_login_submit" type="submit" value="Submit" onclick="login();">
+        </form>
+        <form id="form_login_otros" onsubmit="return false" hidden>
+            <label for="login_otros_dominio">Dominio:</label>
+            <select name="login_otros_dominio" id="login_otros_dominio">
+                <option value="login_otros_dominio_com" selected>.com</option>
+                <option value="login_otros_dominio_ie">.ie</option>            
+                <option value="login_otros_dominio_de">.de</option>
+            </select>
+            <label for="login_otros_cliente">Cliente:</label>
+            <input type=text id="login_otros_cliente"/>
+            <input type="submit" value="Submit" onclick="login();">
+        </form>
+    </div>
+    <h4 id="login_result"></h4>
+    <input id="logout" type="submit" value="Logout" onclick="location.reload();" hidden>
+    <br>
+    <hr>
+    <br>
+
+    <section id="container" class="container" hidden>
+        WrapUp Name <input type=text id="wrapup_name"/>
+        <button id="btn_wrapup_name" onclick="addWrapupCode();">Añadir</button>
+        <p id="wrapup_name_result"></p>
+    </section>
+    <br><hr><br>
+    <section id="container" class="container" hidden>
+        Skill <input type=text id="skill"/>
+        <button id="btn_skill" onclick="addSkill();">Añadir</button>
+        <p id="skill_result"></p>
+    </section>
+</body>
+</html>

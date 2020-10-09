@@ -136,14 +136,14 @@ function addWrapupName(){
         .then(() => {
             console.log("#### Se añade correctamente [" + valor + "] ##");
             document.getElementById('wrapup_name').value = "";
-            document.getElementById("wrapup_name_result").innerHTML = "OK";   
+            document.getElementById("wrapup_name_result").innerHTML = "Se han creado: " + valor;
             })
         .catch((err) => {
             console.log("#### ERROR: No se ha podido añadir el WrapUp Name [" + valor + "] ##");
             console.error(err);
             console.log("### FIN ##");
             document.getElementById('wrapup_name').value = "";
-            document.getElementById("wrapup_name_result").innerHTML = "KO";        
+            document.getElementById("wrapup_name_result").innerHTML = "ERROR. NO se han creado: " + valor;
         });
     })   
 }
@@ -174,14 +174,14 @@ function addSkill(){
         .then(() => {
             console.log("#### Se añade correctamente [" + valor + "] ##");
             document.getElementById('skill').value = "";
-            document.getElementById("skill_result").innerHTML = "OK";   
+            document.getElementById("skill_result").innerHTML = "Se han creado: " + valor;
             })
         .catch((err) => {
             console.log("#### ERROR: No se ha podido añadir el Skill [" + valor + "] ##");
             console.error(err);
             console.log("### FIN ##");
             document.getElementById('skill').value = "";
-            document.getElementById("skill_result").innerHTML = "KO";        
+            document.getElementById("skill_result").innerHTML = "ERROR. NO se han creado: " + valor;
         });
     })   
 }

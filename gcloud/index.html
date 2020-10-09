@@ -23,11 +23,11 @@
                 <li class="nav-item nav-pills">
                     <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown gcscript" hidden>
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Routing
                     </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu gcscript" aria-labelledby="navbarDropdown" hidden>
                     <a class="dropdown-item" href="#">Alta Wrapup Name</a>
                     <a class="dropdown-item" href="#">Alta Skill</a>
                 </li>
@@ -58,18 +58,24 @@
         </form>
     </div>
     <h4 id="login_result"></h4>
-    <input id="logout" type="submit" value="Logout" onclick="location.reload();" hidden>
+    <input id="logout" class="container-fluid text-center mb-5" type="submit" value="Logout" onclick="location.reload();" hidden>
 
     <div class="container-fluid bg-light gcscript" hidden>
         <section>
-            WrapUp Name <input type=text id="wrapup_name"/>
+            <h2 class="display-3">WrapUp Name</h2>
+            <input type=text id="wrapup_name"/>
+            <br>
             <button id="btn_wrapup_name" onclick="addWrapupName();">Añadir</button>
+            <br>
             <p id="wrapup_name_result"></p>
         </section>
         <br><hr><br>
         <section>
-            Skill <input type=text id="skill"/>
+            <h2 class="display-3">Skill</h2>
+            <input type=text id="skill"/>
+            <br>
             <button id="btn_skill" onclick="addSkill();">Añadir</button>
+            <br>
             <p id="skill_result"></p>
         </section>
     </div>

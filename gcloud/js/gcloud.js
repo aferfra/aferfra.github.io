@@ -11,6 +11,7 @@ let cliente;
 let id_cliente;
 let redirectUri;
 let wrapup_name_array = [];
+let arr = [];
 
 // Obtain a reference to the platformClient object
 let platformClient = require('platformClient');
@@ -119,13 +120,20 @@ function addWrapupName(){
     console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
     var body;
     input = document.getElementById('wrapup_name').value;
-    arr = (input.split(", "));
+    arr = new Set([input])
 
-    if (arr[0].includes(",")) {
-        arr = (input.split(","));
-    }
+    // Recorremos los valores para separar las comas
+    arr.forEach( function( valor, indice, array) {
+        console.log(valor);
+        //arr = (valor.split(", "))
+        if (valor.includes(",")){
+            arr = (valor.split(","))
+        } else if (valor.includes(", ")) {
+            arr = (valor.split(", "))
+        }
+    })
 
-    // Recorremos todos los valores
+    // Recorremos todos los valores para dar de alta en Genesys Cloud
     arr.forEach( function( valor, indice, array) {
         console.log("#### Agregamos wrapup code [" + valor + "] ##")
         body = {

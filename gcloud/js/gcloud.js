@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.4         ##");
+console.log("#### Versionado v1.1.5         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -145,7 +145,13 @@ function addWrapupName(){
             document.getElementById('wrapup_name').value = "";
             document.getElementById("wrapup_name_result").innerHTML = "ERROR. NO se han creado: " + input;
         });
-    })   
+    })
+
+    gcscript = document.getElementsByClassName("gcscript_wrapup_name_result");
+    for (i=0; i < gcscript.length; i++){
+        // Ocultamos idioma español
+        gcscript[i].hidden = false;
+    }
 }
 // ######################################################
 // [ROUTING]
@@ -183,5 +189,11 @@ function addSkill(){
             document.getElementById('skill').value = "";
             document.getElementById("skill_result").innerHTML = "ERROR. NO se han creado: " + input;
         });
-    })   
+    })
+    
+    gcscript = document.getElementsByClassName("gcscript_skill_result");
+    for (i=0; i < gcscript.length; i++){
+        // Ocultamos idioma español
+        gcscript[i].hidden = false;
+    }
 }

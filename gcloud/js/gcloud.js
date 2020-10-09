@@ -77,13 +77,13 @@ function login(){
             }
     }
 
-
+    // Hacemos Login
     client.loginImplicitGrant(id_cliente, redirectUri)    
     .then((data) => {
         console.log("## Estamos dentro ##")
         gcscript = document.getElementsByClassName("gcscript");
 
-        document.getElementById("login_result").innerHTML = cliente_text;
+        //document.getElementById("login_result").innerHTML = cliente_text;
         document.getElementById('login').hidden = true;
         document.getElementById('logout').hidden = false;
 
@@ -110,9 +110,12 @@ function login(){
 }
 
 // ######################################################
+// [ROUTING]
+// ######################################################
+// ######################################################
 // FUNCION AGREGAR WRAPUP NAME
 // ######################################################
-function addWrapupCode(wrapup_name){
+function addWrapupName(){
     console.log("#### Entramos en [Añadir nuevo WrapUp] ##");
     var body;
     input = document.getElementById('wrapup_name').value;
@@ -141,6 +144,44 @@ function addWrapupCode(wrapup_name){
             console.log("### FIN ##");
             document.getElementById('wrapup_name').value = "";
             document.getElementById("wrapup_name_result").innerHTML = "KO";        
+        });
+    })   
+}
+// ######################################################
+// [ROUTING]
+// ######################################################
+// ######################################################
+// FUNCION AGREGAR SKILL
+// ######################################################
+function addSkill(){
+    console.log("#### Entramos en [Añadir nuevo Skill] ##");
+    var body;
+    input = document.getElementById('skill').value;
+    arr = (input.split(", "));
+
+    if (arr[0].includes(",")) {
+        arr = (input.split(","));
+    }
+
+    // Recorremos todos los valores
+    arr.forEach( function( valor, indice, array) {
+        console.log("#### Agregamos skill [" + valor + "] ##")
+        body = {
+            'name': valor
+        };
+        // Llamamos a la API
+        RoutingApi.postRoutingSkills(body)
+        .then(() => {
+            console.log("#### Se añade correctamente [" + valor + "] ##");
+            document.getElementById('skill').value = "";
+            document.getElementById("skill_result").innerHTML = "OK";   
+            })
+        .catch((err) => {
+            console.log("#### ERROR: No se ha podido añadir el Skill [" + valor + "] ##");
+            console.error(err);
+            console.log("### FIN ##");
+            document.getElementById('skill').value = "";
+            document.getElementById("skill_result").innerHTML = "KO";        
         });
     })   
 }

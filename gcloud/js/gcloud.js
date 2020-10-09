@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.5         ##");
+console.log("#### Versionado v1.1.6         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -171,13 +171,26 @@ function addSkill(){
     console.log("#### Entramos en [Añadir nuevo Skill] ##");
     var body;
     input = document.getElementById('skill').value;
-    arr = (input.split(", "));
+    arr = new Set([input])
+
+    // Recorremos los valores para separar las comas
+    arr.forEach( function( valor, indice, array) {
+        console.log(valor);
+        //arr = (valor.split(", "))
+        if (valor.includes(",")){
+            arr = (valor.split(","))
+        } else if (valor.includes(", ")) {
+            arr = (valor.split(", "))
+        }
+    })
+
+    /*arr = (input.split(", "));
 
     if (arr[0].includes(",")) {
         arr = (input.split(","));
-    }
+    }*/
 
-    // Recorremos todos los valores
+    // Recorremos todos los valores para dar de alta en Genesys Cloud
     arr.forEach( function( valor, indice, array) {
         console.log("#### Agregamos skill [" + valor + "] ##")
         body = {

@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.9         ##");
+console.log("#### Versionado v1.1.10         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -47,11 +47,13 @@ function login(){
     }
     */
 
+    id_cliente = document.getElementById('login_otros_cliente').value;
+
     switch (cliente) {
         case "login_cliente_btspain":
             console.log("btspain")
             client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
-            id_cliente = "";
+            //id_cliente = ""; // SETEAR
             redirectUri = "https://aferfra.github.io/gcloud/index.html";
             break;
         case "login_cliente_repsol":

@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.8         ##");
+console.log("#### Versionado v1.1.9         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -65,16 +65,19 @@ function login(){
             dominio = dominio.options[dominio.selectedIndex].value;
             switch (dominio) {
                 case "login_otros_dominio_com":
-                    console.log("TO-DO dot com");
-                    redirectUri = "TO-DO"
+                    console.log("# dot com");
+                    redirectUri = "https://aferfra.github.io/gcloud/index.html"
                     break;
                 case "login_otros_dominio_ie":
+                    console.log("# dot ie");
                     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
-                    redirectUri = "TO-DO"
+                    redirectUri = "https://aferfra.github.io/gcloud/index.html"
                     break;
                 case "login_otros_dominio_de":
-                    console.log("TO-DO dot com");
-                    redirectUri = "TO-DO"
+                    console.log("# dot de");
+                    //TO-DO SetEnviroments DE
+                    client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
+                    redirectUri = "https://aferfra.github.io/gcloud/index.html"
                     break;
             }
     }

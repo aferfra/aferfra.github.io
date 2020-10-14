@@ -30,6 +30,7 @@ client.setPersistSettings(true);
 // ######################################################
 function login(){
     // Recogemos valor de Cliente
+    /*
     form_cliente = document.getElementById('login_cliente');
     cliente = form_cliente.options[form_cliente.selectedIndex].value;
     cliente_text = form_cliente.options[form_cliente.selectedIndex].text;
@@ -44,7 +45,7 @@ function login(){
         document.getElementById('form_login_submit').hidden = false;
         document.getElementById('form_login_otros').hidden = true;
     }
-
+    */
 
     switch (cliente) {
         case "login_cliente_btspain":

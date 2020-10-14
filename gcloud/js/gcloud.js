@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.10         ##");
+console.log("#### Versionado v1.1.11         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");

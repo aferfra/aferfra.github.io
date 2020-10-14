@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.12        ##");
+console.log("#### Versionado v1.1.13        ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -91,7 +91,7 @@ function login(){
         gcscript = document.getElementsByClassName("gcscript");
 
         //document.getElementById("login_result").innerHTML = cliente_text;
-        document.getElementById("client_name_connected").innerHTML = "BT SPAIN"        
+        document.getElementById("client_name_connected").innerHTML = "Conectado en: BT SPAIN";
         document.getElementById('client_name_connected').hidden = false;
         document.getElementById('login').hidden = true;
         document.getElementById('logout').hidden = false;

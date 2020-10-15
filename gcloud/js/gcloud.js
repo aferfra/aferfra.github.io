@@ -143,9 +143,9 @@ function getUsers(){
 
     // Llamamos a la API
     UsersApi.getUsers(body)
-    .then(() => {
+    .then((data) => {
         console.log("#### Recogemos usuarios de la API ##");
-        document.getElementById("users_result").innerHTML = input;
+        document.getElementById("users_result").innerHTML = JSON.stringify(data, null, 2);
         })
     .catch((err) => {
         console.log("#### ERROR: No se ha podido recogemor los usuarios de la API ##");

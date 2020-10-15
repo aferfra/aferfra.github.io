@@ -75,7 +75,8 @@ function login(){
                 case "login_otros_dominio_ie":
                     console.log("# dot ie");
                     client.setEnvironment(platformClient.PureCloudRegionHosts.eu_west_1);
-                    redirectUri = "https://aferfra.github.io/gcloud/index.html"
+                    //redirectUri = "https://aferfra.github.io/gcloud/index.html"
+                    redirectUri = "http://127.0.0.1:5500/index.html"
                     break;
                 case "login_otros_dominio_de":
                     console.log("# dot de");
@@ -129,6 +130,8 @@ function login(){
 function getUsers(){
     console.log("#### Entramos en [Recoger Usuarios] ##");
     var body;
+    var result_json;
+    var result_json_names;
 
     body = {
         'pageSize': 25, // Number | Page size
@@ -144,14 +147,21 @@ function getUsers(){
     // Llamamos a la API
     UsersApi.getUsers(body)
     .then((data) => {
+        result_json_entities = data['entities'];
+
+        //Recorremos el entities
+        result_json_entities.forEach(function(data,index){
+            document.getElementById("users_result").innerHTML += (data['name']);
+        })
+
         console.log("#### Recogemos usuarios de la API ##");
-        document.getElementById("users_result").innerHTML = JSON.stringify(data, null, 2);
+        //document.getElementById("users_result").innerHTML = JSON.stringify(data, null, 2);
         })
     .catch((err) => {
         console.log("#### ERROR: No se ha podido recogemor los usuarios de la API ##");
         console.error(err);
         console.log("### FIN ##")
-        document.getElementById("wrapup_name_result").innerHTML = "ERROR. " + err;
+        document.getElementById("users_result").innerHTML = "ERROR. " + err;
     })
 
     gcscript = document.getElementsByClassName("gcscript_users_result");

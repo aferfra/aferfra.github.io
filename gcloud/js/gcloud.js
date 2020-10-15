@@ -1,5 +1,5 @@
 console.log("#################################");
-console.log("#### Versionado v1.1.13        ##");
+console.log("#### Versionado v1.2.0         ##");
 console.log("#### Evolutio                  ##");
 console.log("#### Genesys Cloud Scripts     ##");
 console.log("#################################");
@@ -17,7 +17,9 @@ let arr = [];
 let platformClient = require('platformClient');
 // Plataforma Genesys Cloud
 let client = platformClient.ApiClient.instance;        
-//const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";        
+//const clientId = "111d49da-28b1-43f0-af26-c03f42e80463";
+// API Users
+let UsersApi = new platformClient.UsersApi();
 // API Routing
 let RoutingApi = new platformClient.RoutingApi();
 // Genesys Cloud Dominio
@@ -119,6 +121,46 @@ function login(){
 }
 
 // ######################################################
+// [Users]
+// ######################################################
+// ######################################################
+// RECOGER USUARIOS
+// ######################################################
+function getUsers(){
+    console.log("#### Entramos en [Recoger Usuarios] ##");
+    var body;
+
+    body = {
+        'pageSize': 25, // Number | Page size
+        'pageNumber': 1, // Number | Page number
+        //'id': ["id_example"], // [String] | A list of user IDs to fetch by bulk
+        //'jabberId': ["jabberId_example"], // [String] | A list of jabberIds to fetch by bulk (cannot be used with the \"id\" parameter)
+        'sortOrder': "ASC", // String | Ascending or descending sort order
+        //'expand': ["expand_example"], // [String] | Which fields, if any, to expand
+        //'integrationPresenceSource': "integrationPresenceSource_example", // String | Gets an integration presence for users instead of their defaults. This parameter will only be used when presence is provided as an \"expand\". When using this parameter the maximum number of users that can be returned is 10.
+        'state': "active" // String | Only list users of this state
+    };
+
+    // Llamamos a la API
+    UsersApi.getUsers(body)
+    .then(() => {
+        console.log("#### Recogemos usuarios de la API ##");
+        document.getElementById("users_result").innerHTML = input;
+        })
+    .catch((err) => {
+        console.log("#### ERROR: No se ha podido recogemor los usuarios de la API ##");
+        console.error(err);
+        console.log("### FIN ##")
+        document.getElementById("wrapup_name_result").innerHTML = "ERROR. " + err;
+    })
+
+    gcscript = document.getElementsByClassName("gcscript_users_result");
+    for (i=0; i < gcscript.length; i++){
+        gcscript[i].hidden = false;
+    }
+}
+
+// ######################################################
 // [ROUTING]
 // ######################################################
 // ######################################################
@@ -165,7 +207,6 @@ function addWrapupName(){
 
     gcscript = document.getElementsByClassName("gcscript_wrapup_name_result");
     for (i=0; i < gcscript.length; i++){
-        // Ocultamos idioma español
         gcscript[i].hidden = false;
     }
 }
@@ -222,7 +263,6 @@ function addSkill(){
     
     gcscript = document.getElementsByClassName("gcscript_skill_result");
     for (i=0; i < gcscript.length; i++){
-        // Ocultamos idioma español
         gcscript[i].hidden = false;
     }
 }

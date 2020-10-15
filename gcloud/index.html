@@ -25,6 +25,14 @@
                 </li>
                 <li class="nav-item dropdown gcscript" hidden>
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Users
+                    </a>
+                <div class="dropdown-menu gcscript" aria-labelledby="navbarDropdown" hidden>
+                    <a class="dropdown-item" href="#">Usuarios</a>
+                    <a class="dropdown-item" href="#">.</a>
+                </li>
+                <li class="nav-item dropdown gcscript" hidden>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Routing
                     </a>
                 <div class="dropdown-menu gcscript" aria-labelledby="navbarDropdown" hidden>
@@ -65,13 +73,26 @@
     <div class="container-fluid gcscript" hidden>
         <section>
             <div class="row">
+                <div class="col-5 ">
+                    <h2 class="mb-4">Usuarios</h2>
+                    <p><small>Recogemos el listado de usuarios.</small></p>
+                    <button id="btn_users" type="button" class="btn btn-primary btn-sm" onclick="getUsers();">Enviar</button>
+                    <br>
+                </div>
+                <div class="col-7 mt-5 alert alert-success gcscript_users_result" role="alert" hidden>
+                    <p id="users_result"></p>
+                </div>
+            </div>
+        </section>
+        <section class="mt-4 bg-light">
+            <div class="row">
                 <div class="col-5">
                     <h2 class="mb-4">WrapUp Name</h2>
                     <p><small>Añadir los datos con comas "," y sin espacios en blanco entre ellos.</small></p>
                     <div class="input-group">
                         <textarea id="wrapup_name" class="form-control ma-5 order-2 p-2" aria-label="With textarea"></textarea>
                     </div>
-                    <br><br>
+                    <br>
                     <button id="btn_wrapup_name" type="button" class="btn btn-primary btn-sm" onclick="addWrapupName();">Añadir</button>
                     <br>
                 </div>
@@ -80,7 +101,7 @@
                 </div>
             </div>
         </section>
-        <section class="bg-light mt-4">
+        <section class="mt-4">
             <div class="row">
                 <div class="col-5">
                     <h2 class="mb-4">Skill</h2>
@@ -88,7 +109,7 @@
                     <div class="input-group">
                         <textarea id="skill" class="form-control ma-5 order-2 p-2" aria-label="With textarea"></textarea>
                     </div>
-                    <br><br>
+                    <br>
                     <button id="btn_skill" type="button" class="btn btn-primary btn-sm" onclick="addSkill();">Añadir</button>
                     <br>
                 </div>
